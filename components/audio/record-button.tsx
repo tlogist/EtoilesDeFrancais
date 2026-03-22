@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mic, Square, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { startRecording, stopRecording } from "@/lib/audio";
+import { startRecording, stopRecording, releaseMic } from "@/lib/audio";
 
 export function RecordButton() {
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Release mic when component unmounts (leaving the page)
+  useEffect(() => {
+    return () => releaseMic();
+  }, []);
 
   async function handleToggleRecord() {
     if (recording) {
@@ -34,7 +39,9 @@ export function RecordButton() {
   function handlePlayback() {
     if (audioUrl) {
       const audio = new Audio(audioUrl);
-      audio.play();
+      audio.preload = "auto";
+      audio.oncanplaythrough = () => audio.play();
+      audio.load();
     }
   }
 

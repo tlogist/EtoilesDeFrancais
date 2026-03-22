@@ -47,6 +47,7 @@ export async function speakFrench(text: string): Promise<void> {
 function playAudioUrl(url: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const audio = new Audio(url);
+    audio.preload = "auto";
     currentAudio = audio;
     audio.onended = () => {
       currentAudio = null;
@@ -56,7 +57,12 @@ function playAudioUrl(url: string): Promise<void> {
       currentAudio = null;
       reject(new Error("Audio playback failed"));
     };
-    audio.play().catch(reject);
+    // Wait for enough data to be buffered before playing
+    audio.oncanplaythrough = () => {
+      audio.play().catch(reject);
+    };
+    // Kick off loading
+    audio.load();
   });
 }
 
