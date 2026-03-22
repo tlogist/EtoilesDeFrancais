@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String          @id @default(cuid())
+  createdAt    DateTime        @default(now())
+  currentWeek  Int             @default(1)
+  currentDay   Int             @default(1)
+  streakDays   Int             @default(0)
+  lastActiveAt DateTime?
+  learnerProfile String        @default("") // Accumulated observations about the learner
+  progress     Progress[]
+  conversations Conversation[]
+  vocabProgress VocabProgress[]
+}
+
+model VocabWord {
+  id            String          @id @default(cuid())
+  french        String
+  english       String
+  category      String
+  pronunciation String
+  week          Int
+  progress      VocabProgress[]
+}
+
+model VocabProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  wordId      String
+  easeFactor  Float    @default(2.5)
+  interval    Int      @default(0)
+  repetitions Int      @default(0)
+  nextReview  DateTime @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  word        VocabWord @relation(fields: [wordId], references: [id])
+
+  @@unique([userId, wordId])
+}
+
+model Phrase {
+  id       String  @id @default(cuid())
+  french   String
+  english  String
+  context  String
+  category String
+  isSlang  Boolean @default(false)
+  week     Int
+}
+
+model GrammarRule {
+  id          String @id @default(cuid())
+  title       String
+  shortcut    String
+  explanation String
+  examples    String // JSON array
+  week        Int
+}
+
+model Conversation {
+  id          String   @id @default(cuid())
+  userId      String
+  topic       String
+  messages    String   // JSON array
+  corrections String   @default("[]") // JSON array
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Progress {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  module    String
+  activity  String
+  score     Int?
+  timeSpent Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model ImmersionTask {
+  id           String  @id @default(cuid())
+  week         Int
+  day          Int
+  title        String
+  description  String
+  type         String
+  resourceUrl  String?
+  durationMins Int
+  completed    Boolean @default(false)
+}
