@@ -151,12 +151,18 @@ Return ONLY the JSON array.`,
             <div className="flex gap-2">
               <Input
                 value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
+                onChange={(e) => !showResult && setUserAnswer(e.target.value)}
                 placeholder="Your answer..."
-                disabled={showResult}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && !showResult && checkAnswer()
-                }
+                readOnly={showResult}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    if (showResult) {
+                      next();
+                    } else {
+                      checkAnswer();
+                    }
+                  }
+                }}
               />
               {!showResult && (
                 <Button onClick={checkAnswer}>Check</Button>

@@ -18,7 +18,7 @@ const WARMUP_EXERCISES = [
   {
     title: "The French R",
     instruction: "Gargle gently, then try to say these words with that same throat vibration.",
-    words: ["Regarder", "Rouge", "Paris", "Merci", "Tres bien"],
+    words: ["Regarder", "Rouge", "Paris", "Merci", "Très bien"],
   },
   {
     title: "U vs OU",
@@ -28,12 +28,12 @@ const WARMUP_EXERCISES = [
   {
     title: "Rhythm Practice",
     instruction: "Say each phrase with equal-length syllables, stressing only the last.",
-    words: ["Bonjour", "Merci beaucoup", "S'il vous plait", "Excusez-moi", "Au revoir"],
+    words: ["Bonjour", "Merci beaucoup", "S'il vous plaît", "Excusez-moi", "Au revoir"],
   },
   {
     title: "Connected Speech",
     instruction: "Say these phrases as smoothly as possible, linking words together.",
-    words: ["Comment allez-vous ?", "Je suis content", "Il est alle au cinema", "Qu'est-ce que c'est ?"],
+    words: ["Comment allez-vous ?", "Je suis content", "Il est allé au cinéma", "Qu'est-ce que c'est ?"],
   },
 ];
 

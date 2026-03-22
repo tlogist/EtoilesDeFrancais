@@ -187,18 +187,7 @@ export function getUnlockedContent(currentWeek: number) {
 export function getDailyActivities(week: number, day: number) {
   const dayOfWeek = ((day - 1) % 7) + 1;
   const activities = [
-    {
-      module: "foundation",
-      title: dayOfWeek <= 5 ? "Learn 5 new words" : "Review vocabulary",
-      path: dayOfWeek <= 5 ? "/foundation/learn" : "/foundation/review",
-      duration: 10,
-    },
-    {
-      module: "conversation",
-      title: "10-min conversation practice",
-      path: "/conversation",
-      duration: 10,
-    },
+    // Warm up the mouth first — always start with pronunciation
     {
       module: "pronunciation",
       title:
@@ -210,6 +199,18 @@ export function getDailyActivities(week: number, day: number) {
           ? "/pronunciation"
           : "/pronunciation/warmup",
       duration: 5,
+    },
+    {
+      module: "foundation",
+      title: dayOfWeek <= 5 ? "Learn 5 new words" : "Review vocabulary",
+      path: dayOfWeek <= 5 ? "/foundation/learn" : "/foundation/review",
+      duration: 10,
+    },
+    {
+      module: "conversation",
+      title: "10-min conversation practice",
+      path: "/conversation",
+      duration: 10,
     },
   ];
 
