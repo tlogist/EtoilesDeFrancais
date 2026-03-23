@@ -3,12 +3,14 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // Create default user
-  await prisma.user.upsert({
-    where: { id: "default-user" },
-    update: {},
-    create: { id: "default-user" },
-  });
+  // Create default user only if they don't exist — never overwrite progress
+  const existingUser = await prisma.user.findUnique({ where: { id: "default-user" } });
+  if (!existingUser) {
+    await prisma.user.create({ data: { id: "default-user" } });
+    console.log("Created default user");
+  } else {
+    console.log(`Existing user preserved (Week ${existingUser.currentWeek}, Day ${existingUser.currentDay}, Streak ${existingUser.streakDays})`);
+  }
 
   // Seed vocabulary words (100 most-used French words across 10 categories)
   const vocabWords = [
