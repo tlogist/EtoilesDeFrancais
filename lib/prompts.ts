@@ -25,7 +25,7 @@ export function getConversationPrompt(week: number, topic: string, learnerProfil
 - Respond with 4-5 sentences, matching natural conversation flow`;
 
   const profileSection = learnerProfile
-    ? `\nLEARNER PROFILE (what you know about this student from past conversations):\n${learnerProfile}\n\nUse this profile to personalize your responses — reference their interests, focus on their weak areas, avoid over-explaining things they're already good at. But don't explicitly mention that you have a profile.\n`
+    ? `\nLEARNER PROFILE — YOU ALREADY KNOW THIS STUDENT:\n${learnerProfile}\n\nCRITICAL: You have met this student before. You ALREADY know their name, age, location, job, and interests from previous conversations. DO NOT ask for information that is already in the profile above. Instead, greet them by name naturally and continue building on what you already know. Reference their life details casually, as a friend would. Focus the conversation on practicing NEW vocabulary and grammar rather than re-collecting basic information.\n`
     : "";
 
   return `You are a patient, encouraging French conversation partner helping someone learn French. You genuinely enjoy teaching and celebrate progress.

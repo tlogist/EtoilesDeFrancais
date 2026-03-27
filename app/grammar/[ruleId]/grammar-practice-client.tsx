@@ -47,7 +47,15 @@ Title: ${rule.title}
 Rule: ${rule.shortcut}
 Explanation: ${rule.explanation}
 
-Return JSON: [{"question":"Complete: Je ___ fatigue. (etre, present)","answer":"suis","hint":"je form of etre"}]
+IMPORTANT RULES FOR EXERCISES:
+- Each exercise should have exactly ONE blank (shown as ___) that the student fills in
+- The answer must be a specific word or short phrase the student types — NEVER a pattern like "ne...pas"
+- For negation: show the sentence with one missing word, e.g. "Je ___ mange pas." (answer: "ne") or "Je ne mange ___." (answer: "pas")
+- For conjugation: "Je ___ content." (answer: "suis")
+- For articles: "Je bois ___ café." (answer: "du")
+- The answer should be 1-3 words maximum, something concrete the student can type
+
+Return JSON: [{"question":"Complete: Je ___ mange pas de viande.","answer":"ne","hint":"first part of the negation sandwich"}]
 Return ONLY the JSON array.`,
           useSmartModel: true,
         }),
@@ -142,9 +150,9 @@ Return ONLY the JSON array.`,
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <p className="text-sm">{exercises[currentIndex].question}</p>
+            <p className="text-lg">{exercises[currentIndex].question}</p>
             {exercises[currentIndex].hint && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Hint: {exercises[currentIndex].hint}
               </p>
             )}
@@ -177,7 +185,7 @@ Return ONLY the JSON array.`,
                   ) : (
                     <XCircle className="h-5 w-5 text-red-500" />
                   )}
-                  <span className="text-sm">
+                  <span className="text-lg">
                     Answer: <strong>{exercises[currentIndex].answer}</strong>
                   </span>
                 </div>

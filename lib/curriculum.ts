@@ -224,10 +224,18 @@ export function getDailyActivities(week: number, day: number) {
     });
   }
 
-  // Add immersion journal on alternating days
+  // Immersion tasks every day — the core of daily exposure
+  activities.push({
+    module: "immersion",
+    title: `Immersion tasks (Day ${day})`,
+    path: "/immersion",
+    duration: 30,
+  });
+
+  // Journal on alternating days
   if (dayOfWeek % 2 === 0) {
     activities.push({
-      module: "immersion",
+      module: "journal",
       title: "French journal entry",
       path: "/immersion/journal",
       duration: 15,

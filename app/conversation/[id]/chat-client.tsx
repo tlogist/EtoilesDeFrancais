@@ -81,7 +81,7 @@ export function ChatClient({
     // If no messages yet, add a system-like first user message
     const toSend =
       currentMessages.length === 0
-        ? [{ role: "user" as const, content: `Let's practice! Topic: ${topic}. Please start the conversation in French.` }]
+        ? [{ role: "user" as const, content: `Let's practice! Topic: ${topic}. Please start the conversation in French. If you already know my name and details from the learner profile, don't ask for them again — greet me by name and pick up from where we are in our learning journey.` }]
         : currentMessages;
 
     try {

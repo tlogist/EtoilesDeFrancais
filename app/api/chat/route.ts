@@ -22,6 +22,11 @@ export async function POST(request: Request) {
     })
   );
 
+  console.log("=== CHAT REQUEST ===");
+  console.log("Profile loaded:", learnerProfile ? `${learnerProfile.length} chars` : "NONE");
+  console.log("System prompt length:", systemPrompt.length);
+  console.log("Messages count:", anthropicMessages.length);
+
   try {
     const stream = anthropic.messages.stream({
       model: SMART_MODEL,

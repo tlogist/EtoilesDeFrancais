@@ -15,9 +15,10 @@ model User {
   streakDays   Int             @default(0)
   lastActiveAt DateTime?
   learnerProfile String        @default("") // Accumulated observations about the learner
-  progress     Progress[]
+  progress      Progress[]
   conversations Conversation[]
   vocabProgress VocabProgress[]
+  journalEntries JournalEntry[]
 }
 
 model VocabWord {
@@ -82,6 +83,16 @@ model Progress {
   score     Int?
   timeSpent Int
   user      User     @relation(fields: [userId], references: [id])
+}
+
+model JournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime @default(now())
+  prompt      String
+  entry       String
+  correction  String
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model ImmersionTask {

@@ -109,7 +109,7 @@ export function GrammarClient({
                     >
                       <CardHeader className="py-3 px-4">
                         <div className="flex items-center justify-between">
-                          <CardTitle className="text-sm">
+                          <CardTitle className="text-lg">
                             {rule.title}
                           </CardTitle>
                           {isExpanded ? (
@@ -118,7 +118,7 @@ export function GrammarClient({
                             <ChevronDown className="h-4 w-4 text-muted-foreground" />
                           )}
                         </div>
-                        <CardDescription className="text-xs">
+                        <CardDescription className="text-sm">
                           {rule.shortcut}
                         </CardDescription>
                       </CardHeader>
@@ -126,14 +126,14 @@ export function GrammarClient({
 
                     {isExpanded && (
                       <CardContent className="pt-0 px-4 pb-4 space-y-3">
-                        <p className="text-sm">{rule.explanation}</p>
+                        <p className="text-base">{rule.explanation}</p>
 
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold text-muted-foreground uppercase">
+                        <div className="space-y-1.5">
+                          <p className="text-sm font-semibold text-muted-foreground uppercase">
                             Examples
                           </p>
                           {rule.examples.map((ex, i) => (
-                            <p key={i} className="text-sm text-muted-foreground">
+                            <p key={i} className="text-base text-muted-foreground">
                               {ex}
                             </p>
                           ))}
@@ -145,7 +145,7 @@ export function GrammarClient({
                               <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
                                 Alternative Explanation
                               </p>
-                              <p className="text-sm">
+                              <p className="text-base">
                                 {altExplanation[rule.id]}
                               </p>
                             </CardContent>
